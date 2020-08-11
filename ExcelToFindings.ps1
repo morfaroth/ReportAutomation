@@ -1,8 +1,11 @@
-﻿$objWord = New-Object -comobject Word.Application  
+﻿Add-Type -AssemblyName System.Windows.Forms
+$objWord = New-Object -comobject Word.Application  
 $objWord.Visible = $false
 
- 
- 
+$FindingsFile = New-Object System.Windows.Forms.OpenFileDialog -Property @{ InitialDirectory = [Environment]::GetFolderPath('Desktop') }
+
+$null = $FindingsFile.ShowDialog()
+$FindingsFile
 $MatchCase = $False 
 $MatchWholeWord = $true
 $MatchWildcards = $False 
@@ -16,8 +19,8 @@ $wdFindContinue = 1
 $wdReplaceAll = 2
 $findingDocuments = @()
 
-Import-Csv .\findings.csv | ForEach-Object {
-    $objDoc = $objWord.Documents.Open("C:\Users\Matthew\Desktop\Template Find and Replace\FindingTemplate.docx") 
+Import-Csv $FindingsFile.FileName | ForEach-Object {
+    $objDoc = $objWord.Documents.Open($PSScriptRoot+"\FindingTemplate.docx") 
     $objSelection = $objWord.Selection
 
     $a = $objSelection.Find.Execute("<Name>",$MatchCase,$MatchWholeWord, ` 
@@ -48,7 +51,7 @@ Import-Csv .\findings.csv | ForEach-Object {
     $MatchWildcards,$MatchSoundsLike,$MatchAllWordForms,$Forward,` 
     $Wrap,$Format,$($_.Scenario),$wdReplaceAll) 
 
-    $name = "C:\Users\Matthew\Desktop\Template Find and Replace\$($_.Name).docx"
+    $name = $PSScriptRoot+"\$($_.Name).docx"
     $findingDocuments += "$($name)"
     $objDoc.Saveas([ref]$name,[ref]$SaveFormat::wdFormatDocument)
 }
@@ -59,6 +62,6 @@ foreach($finding in $findingDocuments){
     $objSelection.TypeParagraph()
     $objSelection.InsertFile($finding)
 }
-$name = "C:\Users\Matthew\Desktop\Template Find and Replace\allfindings.docx"
+$name = $PSScriptRoot+"\allfindings.docx"
 $objDoc.Saveas([ref]$name,[ref]$SaveFormat::wdFormatDocument)
 $objWord.Quit()
