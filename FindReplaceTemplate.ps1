@@ -1,7 +1,12 @@
 ﻿$objWord = New-Object -comobject Word.Application  
 $objWord.Visible = $false
 
-$objDoc = $objWord.Documents.Open("C:\Users\Matthew\Desktop\Template Find and Replace\test.docx") 
+$TemplateFile = New-Object System.Windows.Forms.OpenFileDialog -Property @{ InitialDirectory = [Environment]::GetFolderPath('Desktop') }
+$TemplateFile.filter = "DOCX (*.docx)| *.docx"
+$null = $TemplateFile.ShowDialog()
+
+
+$objDoc = $objWord.Documents.Open($TemplateFile.FileName) 
 $objSelection = $objWord.Selection 
  
 $MatchCase = $False 
@@ -16,7 +21,11 @@ $wdReplaceNone = 0
 $wdFindContinue = 1 
 $wdReplaceAll = 2
 
-Import-Csv .\PentestReport-VARIABLES.csv | ForEach-Object {
+$VariableFile = New-Object System.Windows.Forms.OpenFileDialog -Property @{ InitialDirectory = [Environment]::GetFolderPath('Desktop') }
+$VariableFile.filter = "CSV (*.csv)| *.csv"
+$null = $VariableFile.ShowDialog()
+
+Import-Csv $VariableFile.FileName | ForEach-Object {
     Write-Host "$($_.VariableName)"
     $a = $objSelection.Find.Execute($($_.VariableName),$MatchCase,$MatchWholeWord, ` 
     $MatchWildcards,$MatchSoundsLike,$MatchAllWordForms,$Forward,` 
