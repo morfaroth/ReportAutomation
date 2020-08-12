@@ -5,7 +5,7 @@ $objWord.Visible = $false
 $FindingsFile = New-Object System.Windows.Forms.OpenFileDialog -Property @{ InitialDirectory = [Environment]::GetFolderPath('Desktop') }
 
 $null = $FindingsFile.ShowDialog()
-$FindingsFile
+
 $MatchCase = $False 
 $MatchWholeWord = $true
 $MatchWildcards = $False 
@@ -54,6 +54,7 @@ Import-Csv $FindingsFile.FileName | ForEach-Object {
     $name = $PSScriptRoot+"\$($_.Name).docx"
     $findingDocuments += "$($name)"
     $objDoc.Saveas([ref]$name,[ref]$SaveFormat::wdFormatDocument)
+    $objDoc.Close()
 }
 
 $objDoc = $objWord.Documents.Add()
@@ -61,6 +62,7 @@ $objSelection = $objWord.Selection
 foreach($finding in $findingDocuments){
     $objSelection.TypeParagraph()
     $objSelection.InsertFile($finding)
+	Remove-Item -Path $finding
 }
 $name = $PSScriptRoot+"\allfindings.docx"
 $objDoc.Saveas([ref]$name,[ref]$SaveFormat::wdFormatDocument)

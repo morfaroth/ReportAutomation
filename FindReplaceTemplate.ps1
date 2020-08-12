@@ -26,7 +26,6 @@ $VariableFile.filter = "CSV (*.csv)| *.csv"
 $null = $VariableFile.ShowDialog()
 
 Import-Csv $VariableFile.FileName | ForEach-Object {
-    Write-Host "$($_.VariableName)"
     $a = $objSelection.Find.Execute($($_.VariableName),$MatchCase,$MatchWholeWord, ` 
     $MatchWildcards,$MatchSoundsLike,$MatchAllWordForms,$Forward,` 
     $Wrap,$Format,$($_.Value),$wdReplaceAll) 
