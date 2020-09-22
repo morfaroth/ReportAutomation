@@ -1,3 +1,32 @@
-Name,Risk,Scenario,Description,Impact,AffectResources,Recommendation
-Test,High,Test,Blue,Red,Yellow,Stuff
-Test2,High,Test,Blue,Red,Yellow,Stuff
+Name,Risk,Scenario,Description,Impact,AffectedResources,Recommendation
+Vulnerable version of the library 'YUI' found,High,Web Application,YUI version 2.9.0 was found to be in use. Multiple vulnerabilities have been reported for this version of the JavaScript library. ,This version of YUI has known high impact vulnerabilities. ,https://mburgessdemo.straining.reliaslearning.com/new/oidc-client.min.js,Upgrade to the latest version.
+Password field with autocomplete enabled,Low,Web Application,"Most browsers have a facility to remember user credentials that are entered into HTML forms. This function can be configured by the user and also by applications that employ user credentials. If the function is enabled, then credentials entered by the user are stored on their local computer and retrieved by the browser on future visits to the same application.","The stored credentials can be captured by an attacker who gains control over the user's computer. Further, an attacker who finds a separate application vulnerability such as cross-site scripting may be able to exploit this to retrieve a user's browser-stored credentials.","https://mburgessdemo.straining.reliaslearning.com/
+https://mburgessdemo.straining.reliaslearning.com/Users/User.aspx
+https://mburgessdemo.straining.reliaslearning.com/lib/RegistrationForm.aspx","To prevent browsers from storing credentials entered into HTML forms, include the attribute autocomplete=""off"" within the FORM tag (to protect all form fields) or within the relevant INPUT tags (to protect specific individual fields).
+Please note that modern web browsers may ignore this directive. In spite of this there is a chance that not disabling autocomplete may cause problems obtaining PCI compliance."
+Vulnerable version of the library 'tinyMCE' found,Moderate,Web Application,tinyMCE version 4.4.3 was found to be in use. Multiple vulnerabilities have been reported for this version of the JavaScript library. ,This version of tinyMCE has known moderate impact vulnerabilities. ,https://mburgessdemo.straining.reliaslearning.com/scripts/tinymce/js/tinymce/tinymce.min.js,Upgrade to the latest version.
+Vulnerable version of the library 'jQuery' found,Moderate,Web Application,jQuery 1.11.1.min was found to be in use. Multiple vulnerabilities have been reported for this version of the JavaScript library. ,This version of jQuery has known moderate impact vulnerabilities. ,"https://mburgessdemo.straining.reliaslearning.com/
+https://mburgessdemo.straining.reliaslearning.com/Administration/Appearance.aspx
+https://mburgessdemo.straining.reliaslearning.com/Administration/AppearanceUploadLogo.aspx
+https://mburgessdemo.straining.reliaslearning.com/Administration/Libraries.aspx
+https://mburgessdemo.straining.reliaslearning.com/Administration/Library.aspx
+https://mburgessdemo.straining.reliaslearning.com/Administration/Organizations.aspx
+https://mburgessdemo.straining.reliaslearning.com/Administration/ShareCourses.aspx
+https://mburgessdemo.straining.reliaslearning.com/Administration/ShareCurricula.aspx
+https://mburgessdemo.straining.reliaslearning.com/Certificates/ShareCertificates.aspx
+https://mburgessdemo.straining.reliaslearning.com/Dashboard.aspx
+https://mburgessdemo.straining.reliaslearning.com/Learning/Assessments.aspx
+https://mburgessdemo.straining.reliaslearning.com/Learning/Catalog.aspx
+https://mburgessdemo.straining.reliaslearning.com/Learning/CourseViewer.aspx
+https://mburgessdemo.straining.reliaslearning.com/Learning/CurrentTraining.aspx
+https://mburgessdemo.straining.reliaslearning.com/Learning/Enrollment/CourseEnrolled.aspx
+https://mburgessdemo.straining.reliaslearning.com/Learning/LicensesAndCertificates.aspx
+https://mburgessdemo.straining.reliaslearning.com/Learning/Transcript.aspx
+https://mburgessdemo.straining.reliaslearning.com/Logout.aspx
+https://mburgessdemo.straining.reliaslearning.com/RLConnect.aspx
+https://mburgessdemo.straining.reliaslearning.com/Users/SharedUsers.aspx
+https://mburgessdemo.straining.reliaslearning.com/Users/User.aspx
+https://mburgessdemo.straining.reliaslearning.com/Users/Users.aspx
+https://mburgessdemo.straining.reliaslearning.com/Users/UsersLicensesAndCertifications.aspx
+https://mburgessdemo.straining.reliaslearning.com/lib/RegistrationForm.aspx
+https://mburgessdemo.straining.reliaslearning.com/scripts/jquery-1.11.1.min.js",Upgrade to the latest version.

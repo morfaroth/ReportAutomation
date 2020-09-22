@@ -18,38 +18,33 @@ $wdReplaceNone = 0
 $wdFindContinue = 1 
 $wdReplaceAll = 2
 $findingDocuments = @()
+$retOutput = @()
 
 Import-Csv $FindingsFile.FileName | ForEach-Object {
     $objDoc = $objWord.Documents.Open($PSScriptRoot+"\FindingTemplate.docx") 
     $objSelection = $objWord.Selection
+   
 
-    $a = $objSelection.Find.Execute("<Name>",$MatchCase,$MatchWholeWord, ` 
-    $MatchWildcards,$MatchSoundsLike,$MatchAllWordForms,$Forward,` 
-    $Wrap,$Format,$($_.Name),$wdReplaceAll) 
+    $objrange = $objDoc.Bookmarks.Item("Name").Range 
+	$objrange.Text = $($_.Name)
+
+	$objrange = $objDoc.Bookmarks.Item("Risk").Range 
+	$objrange.Text = $($_.Risk)
+	
+	$objrange = $objDoc.Bookmarks.Item("Description").Range 
+	$objrange.Text = $($_.Description)
     
-    $a = $objSelection.Find.Execute("<Risk>",$MatchCase,$MatchWholeWord, ` 
-    $MatchWildcards,$MatchSoundsLike,$MatchAllWordForms,$Forward,` 
-    $Wrap,$Format,$($_.Risk),$wdReplaceAll)
-    
-    $a = $objSelection.Find.Execute("<Description>",$MatchCase,$MatchWholeWord, ` 
-    $MatchWildcards,$MatchSoundsLike,$MatchAllWordForms,$Forward,` 
-    $Wrap,$Format,$($_.Description),$wdReplaceAll)
-    
-    $a = $objSelection.Find.Execute("<Impact>",$MatchCase,$MatchWholeWord, ` 
-    $MatchWildcards,$MatchSoundsLike,$MatchAllWordForms,$Forward,` 
-    $Wrap,$Format,$($_.Impact),$wdReplaceAll) 
+	$objrange = $objDoc.Bookmarks.Item("Impact").Range 
+	$objrange.Text = $($_.Impact)
 
-    $a = $objSelection.Find.Execute("<AffectedResources>",$MatchCase,$MatchWholeWord, ` 
-    $MatchWildcards,$MatchSoundsLike,$MatchAllWordForms,$Forward,` 
-    $Wrap,$Format,$($_.AffectedResources),$wdReplaceAll) 
+	$objrange = $objDoc.Bookmarks.Item("AffectedResources").Range 
+	$objrange.Text = $($_.AffectedResources)
 
-    $a = $objSelection.Find.Execute("<Recommendation>",$MatchCase,$MatchWholeWord, ` 
-    $MatchWildcards,$MatchSoundsLike,$MatchAllWordForms,$Forward,` 
-    $Wrap,$Format,$($_.Recommendation),$wdReplaceAll) 
+	$objrange = $objDoc.Bookmarks.Item("Recommendation").Range 
+	$objrange.Text = $($_.Recommendation)
 
-    $a = $objSelection.Find.Execute("<Scenario>",$MatchCase,$MatchWholeWord, ` 
-    $MatchWildcards,$MatchSoundsLike,$MatchAllWordForms,$Forward,` 
-    $Wrap,$Format,$($_.Scenario),$wdReplaceAll) 
+	$objrange = $objDoc.Bookmarks.Item("Scenario").Range 
+	$objrange.Text = $($_.Scenario)
 
     $name = $PSScriptRoot+"\$($_.Name).docx"
     $findingDocuments += "$($name)"
